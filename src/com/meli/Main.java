@@ -1,6 +1,9 @@
 package com.meli;
 
 import com.meli.race.Race;
+import com.meli.vehicle.Motorcycle;
+import com.meli.vehicle.SafeCar;
+import com.meli.vehicle.SafeMotorcycle;
 import com.meli.vehicle.Vehicle;
 
 import java.math.BigDecimal;
@@ -32,5 +35,12 @@ public class Main {
         Optional<Vehicle> vehicleWinnerOpt = race.getWinner();
         System.out.print("Winner is!!: ");
         vehicleWinnerOpt.ifPresent(System.out::println);
+
+
+        race.setSafeCar(new SafeCar());
+        race.setSafeMotorcycle(new SafeMotorcycle());
+
+        race.rescueCar("ABC1234");
+        race.rescueMotorcycle("CVR4333");
     }
 }

@@ -1,8 +1,6 @@
 package com.meli.race;
 
-import com.meli.vehicle.Car;
-import com.meli.vehicle.Motorcycle;
-import com.meli.vehicle.Vehicle;
+import com.meli.vehicle.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -17,6 +15,8 @@ public class Race {
     private String name;
     private Long allowedVehicles;
     private List<Vehicle> listVehicles = new ArrayList<>();
+    private SafeCar safeCar;
+    private SafeMotorcycle safeMotorcycle;
 
     private boolean checkLimitReached() {
         if (listVehicles.size() >= allowedVehicles) {
@@ -61,6 +61,23 @@ public class Race {
                         (vehicle.getAngle()*(vehicle.getWeight() - (vehicle.getWheels()*100) ))));
     }
 
+    private List<?> getVehicleByPlate(String plate) {
+        return listVehicles.stream().filter(vehicle -> vehicle.getPlate().equals(plate)).collect(Collectors.toList());
+    }
+
+    public void rescueCar(String plate) {
+        List<Car> vehicle = (List<Car>) getVehicleByPlate(plate);
+        if (vehicle.size() > 0)
+            safeCar.rescue(vehicle.get(0));
+    }
+
+    public void rescueMotorcycle(String plate) {
+        List<Motorcycle> vehicle = (List<Motorcycle>) getVehicleByPlate(plate);
+        if (vehicle.size() > 0)
+            safeMotorcycle.rescue(vehicle.get(0));
+    }
+
+
     public double getDistance() {
         return distance;
     }
@@ -99,5 +116,21 @@ public class Race {
 
     public void setListVehicles(List<Vehicle> listVehicles) {
         this.listVehicles = listVehicles;
+    }
+
+    public SafeCar getSafeCar() {
+        return safeCar;
+    }
+
+    public void setSafeCar(SafeCar safeCar) {
+        this.safeCar = safeCar;
+    }
+
+    public SafeMotorcycle getSafeMotorcycle() {
+        return safeMotorcycle;
+    }
+
+    public void setSafeMotorcycle(SafeMotorcycle safeMotorcycle) {
+        this.safeMotorcycle = safeMotorcycle;
     }
 }
