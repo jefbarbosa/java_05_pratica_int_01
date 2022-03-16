@@ -6,7 +6,9 @@ import com.meli.vehicle.Vehicle;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Race {
@@ -51,6 +53,12 @@ public class Race {
     public void printAllVehicles() {
         System.out.println();
         listVehicles.forEach(System.out::println);
+    }
+
+    public Optional<Vehicle> getWinner() {
+        return listVehicles.stream()
+                .max(Comparator.comparing(vehicle -> vehicle.getSpeed()*0.5*vehicle.getAcceleration()/
+                        (vehicle.getAngle()*(vehicle.getWeight() - (vehicle.getWheels()*100) ))));
     }
 
     public double getDistance() {

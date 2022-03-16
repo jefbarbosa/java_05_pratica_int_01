@@ -1,8 +1,10 @@
 package com.meli;
 
 import com.meli.race.Race;
+import com.meli.vehicle.Vehicle;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 public class Main {
 
@@ -27,7 +29,8 @@ public class Main {
         race.deleteVehicleWithPlate("PRF7455");
         race.printAllVehicles();
 
-
-
+        Optional<Vehicle> vehicleWinnerOpt = race.getWinner();
+        System.out.print("Winner is!!: ");
+        vehicleWinnerOpt.ifPresent(System.out::println);
     }
 }
